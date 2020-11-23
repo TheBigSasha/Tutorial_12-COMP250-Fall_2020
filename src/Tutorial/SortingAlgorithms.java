@@ -256,6 +256,16 @@ public class SortingAlgorithms {
         return endTime-StartTime;
     }
 
+    @benchmark(name = "add to heap", category = "heap")
+    public static long addToHeap(long input){
+        Heap<String> tested = buildHeap(input );
+        String testSubject = rand.nextInt(5325323) + " Test " + 34 + " ---- " + " " + (char) rand.nextInt(400);
+        long StartTime = System.nanoTime();
+        tested.add(testSubject);
+        long EndTime = System.nanoTime();
+        return EndTime-StartTime;
+    }
+
     private static BinaryTree<String> buildBalancedTree(long size){
         BinaryTree<String> bTree = new BinaryTree<>();
         for(long i = 0; i <size; i++){
@@ -278,6 +288,15 @@ public class SortingAlgorithms {
             bTree.add(((char) i + " Test " + (char) i + " ---- " + " " ));
         }
         return bTree;
+    }
+
+    public static Heap<String> buildHeap(long size){
+        Heap<String> out = new Heap<>(new String[]{}, false);
+        for(long i = size; i >0; i--){
+            out.add(((char) i + " Test " + (char) i + " ---- " + " " ));
+        }
+        return out;
+
     }
 
 }
