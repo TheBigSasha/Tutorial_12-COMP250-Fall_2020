@@ -256,6 +256,33 @@ public class SortingAlgorithms {
         return endTime-StartTime;
     }
 
+    @benchmark(name = "add", category = "Heap")
+    public static long addToHeap(long input){
+        Heap<String> h = buildHeap(input);
+        String toAdd = (char) rand.nextInt(5325323) + " Test " + 124513 + " ---- " + " " + (char) rand.nextInt(400);
+        long startTime = System.nanoTime();
+        h.add(toAdd);       //NOTICE THE ONLY METHOD I CALL INCLUDING CONSTRUCTORS IS THE ONE I AM TESTING
+        long endTime = System.nanoTime();
+        return endTime - startTime;
+    }
+
+    @benchmark(name = "pop", category = "Heap")
+    public static long popFromHeap(long input){
+        Heap<String> h = buildHeap(input);
+        String toAdd = (char) rand.nextInt(5325323) + " Test " + 124513 + " ---- " + " " + (char) rand.nextInt(400);
+        long startTime = System.nanoTime();
+        h.pop();      //NOTICE THE ONLY METHOD I CALL INCLUDING CONSTRUCTORS IS THE ONE I AM TESTING
+        long endTime = System.nanoTime();
+        return endTime - startTime;
+    }
+
+    @benchmark(name = "Log(n)", theoretical = true, category = "Bad math methods")
+    public static long logN(long input){
+        return 600* (long) (Math.log(600 *input));
+    }
+
+
+
     private static BinaryTree<String> buildBalancedTree(long size){
         BinaryTree<String> bTree = new BinaryTree<>();
         for(long i = 0; i <size; i++){
@@ -278,6 +305,14 @@ public class SortingAlgorithms {
             bTree.add(((char) i + " Test " + (char) i + " ---- " + " " ));
         }
         return bTree;
+    }
+
+    private static Heap<String> buildHeap(long size){
+        Heap<String> heap = new Heap<>(false);
+        for(long i = size; i >0; i--){
+            heap.add(((char) rand.nextInt(5325323) + " Test " + i + " ---- " + " " + (char) rand.nextInt(400)));
+        }
+        return heap;
     }
 
 }
